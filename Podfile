@@ -6,7 +6,6 @@ target 'OneToOne' do
   use_frameworks!
 
   # Pods for OneToOne
-  pod 'CLTypingLabel'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
 
