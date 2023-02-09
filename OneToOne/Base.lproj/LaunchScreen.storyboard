@@ -15,22 +15,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OneToOne" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWK-8z-OVw">
-                                <rect key="frame" x="50" y="376" width="275" height="60"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainImage" translatesAutoresizingMaskIntoConstraints="NO" id="Cck-za-qC4">
+                                <rect key="frame" x="87.666666666666686" y="331" width="200" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="xIg-9C-g0Q"/>
+                                    <constraint firstAttribute="width" constant="200" id="5tV-f5-baa"/>
+                                    <constraint firstAttribute="height" constant="150" id="9Da-As-SpP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="35"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.14901960784313725" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="DWK-8z-OVw" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5c5-g1-kKC"/>
-                            <constraint firstItem="DWK-8z-OVw" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="O9L-ez-0cq"/>
-                            <constraint firstItem="DWK-8z-OVw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="iza-uO-r3p"/>
+                            <constraint firstItem="Cck-za-qC4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="RXH-VH-c0G"/>
+                            <constraint firstItem="Cck-za-qC4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="dM5-jh-1bM"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -39,4 +36,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mainImage" width="170.66667175292969" height="170.66667175292969"/>
+    </resources>
 </document>
