@@ -5,30 +5,28 @@ import FirebaseFirestore
 
 class ChatVC: UIViewController {
     // MARK: - IBOutlets
+    
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Objects
+    
     var messages: [Message] = []
-    // Initialization of our database.
     let db = Firestore.firestore()
     
     // MARK: - ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         title = K.appName
         navigationItem.hidesBackButton = true
-        
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
-        
         loadMessages()
     }
     
     func loadMessages() {
-        db.collection(K.FStore.collectionName)
-            .order(by: K.FStore.bodyField)
-            .addSnapshotListener { querySnapshot, error in
+        db.collection(K.FStore.collectionName).order(by: K.FStore.dateField).addSnapshotListener { querySnapshot, error in
             self.messages = []
             if let err = error {
                 print("Error getting documents: \(err)")
@@ -49,8 +47,8 @@ class ChatVC: UIViewController {
             }
         }
     }
-    
     // MARK: - IBActions
+    
     @IBAction func sendMessageButtonPressed(_ sender: UIButton) {
         if let messageBody = messageTextField.text, let messageSender = Auth.auth().currentUser?.email {
             db.collection(K.FStore.collectionName).addDocument(data: [
@@ -66,6 +64,7 @@ class ChatVC: UIViewController {
             }
         }
     }
+    
     @IBAction func logOutButtonPressed(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
         do {
@@ -78,10 +77,12 @@ class ChatVC: UIViewController {
 }
 
 // MARK: - Extensions
+
 extension ChatVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
         cell.label.text = messages[indexPath.row].body
