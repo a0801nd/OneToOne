@@ -5,17 +5,14 @@ import FirebaseFirestore
 
 class ChatVC: UIViewController {
     // MARK: - IBOutlets
-    
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Objects
-    
     var messages: [Message] = []
     let db = Firestore.firestore()
     
     // MARK: - ViewDidLoad
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -40,6 +37,8 @@ class ChatVC: UIViewController {
                             
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
+                                let index = IndexPath(row: self.messages.count - 1, section: 0)
+                                self.tableView.scrollToRow(at: index, at: .top, animated: true)
                             }
                         }
                     }
@@ -47,8 +46,8 @@ class ChatVC: UIViewController {
             }
         }
     }
-    // MARK: - IBActions
     
+    // MARK: - IBActions
     @IBAction func sendMessageButtonPressed(_ sender: UIButton) {
         if let messageBody = messageTextField.text, let messageSender = Auth.auth().currentUser?.email {
             db.collection(K.FStore.collectionName).addDocument(data: [
@@ -60,11 +59,14 @@ class ChatVC: UIViewController {
                     print("Error adding document: \(err)")
                 } else {
                     print("Document added")
+                    
+                    DispatchQueue.main.async {
+                        self.messageTextField.text = ""
+                    }
                 }
             }
         }
     }
-    
     @IBAction func logOutButtonPressed(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
         do {
@@ -76,16 +78,29 @@ class ChatVC: UIViewController {
     }
 }
 
-// MARK: - Extensions
-
+    // MARK: - Extensions
 extension ChatVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = messages[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
-        cell.label.text = messages[indexPath.row].body
+        cell.label.text = message.body
+        
+        // This is a message from the current user
+        if message.sender == Auth.auth().currentUser?.email {
+            cell.userImageLeft.isHidden = true
+            cell.userImageRight.isHidden = false
+            cell.label.textColor = UIColor(named: K.BrandColors.white)
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.marine)
+        } else {
+            cell.userImageLeft.isHidden = false
+            cell.userImageRight.isHidden = true
+            cell.label.textColor = UIColor(named: K.BrandColors.white)
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.green)
+        }
         return cell
     }
 }

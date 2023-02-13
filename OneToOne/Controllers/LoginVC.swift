@@ -5,7 +5,6 @@ import FirebaseAuth
 
 class LoginVC: UIViewController {
     // MARK: - IBOutlets
-    
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -14,7 +13,6 @@ class LoginVC: UIViewController {
     var delegate: UITextFieldDelegate?
     
     // MARK: - ViewDidLoad
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTF.delegate = self
@@ -22,13 +20,12 @@ class LoginVC: UIViewController {
     }
     
     // MARK: - IBActions
-    
     @IBAction func passwordTextFieldChanged(_ sender: UITextField) {
         if sender.text!.count < 6 {
-            loginButton.layer.backgroundColor = #colorLiteral(red: 1, green: 0.3921568627, blue: 0.3921568627, alpha: 0.8964710884)
+            loginButton.layer.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
             loginButton.isEnabled = false
         } else {
-            loginButton.layer.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.4431372549, blue: 0.537254902, alpha: 0.7983365221)
+            loginButton.layer.backgroundColor = #colorLiteral(red: 0.4274509804, green: 0.5960784314, blue: 0.5254901961, alpha: 0.8019971026)
             loginButton.isEnabled = true
         }
     }
@@ -44,8 +41,7 @@ class LoginVC: UIViewController {
         }
     }
 }
-// MARK: - Extensions
-
+    // MARK: - Extensions
 extension LoginVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

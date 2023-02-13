@@ -14,7 +14,6 @@ class RegisterVC: UIViewController {
     var delegate: UITextFieldDelegate?
     
     // MARK: - ViewDidLoad
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTF.delegate = self
@@ -22,7 +21,6 @@ class RegisterVC: UIViewController {
     }
     
     // MARK: - IBActions
-    
     @IBAction func registerButtonPressed(_ sender: UIButton) {
         if let email = emailTF.text, let password = passwordTF.text {
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -37,16 +35,15 @@ class RegisterVC: UIViewController {
     }
     @IBAction func passwordTextFieldChanged(_ sender: UITextField) {
         if sender.text!.count < 6 {
-            registerButton.layer.backgroundColor = #colorLiteral(red: 1, green: 0.3921568627, blue: 0.3921568627, alpha: 0.8964710884)
+            registerButton.layer.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
             registerButton.isEnabled = false
         } else {
-            registerButton.layer.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.4431372549, blue: 0.537254902, alpha: 0.7983365221)
+            registerButton.layer.backgroundColor = #colorLiteral(red: 0.2039215686, green: 0.3019607843, blue: 0.4039215686, alpha: 1)
             registerButton.isEnabled = true
         }
     }
 }
 // MARK: - Extensions
-
 extension RegisterVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
